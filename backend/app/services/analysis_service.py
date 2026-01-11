@@ -8,7 +8,6 @@ import pandas as pd
 from typing import List, Optional, Dict, Any, Tuple
 from sqlalchemy.orm import Session
 from scipy import signal, stats
-from sklearn.metrics.pairwise import cosine_similarity
 
 from app.models.models import Cycle, Deviation, Dataset
 from app.services.cycle_service import CycleService
