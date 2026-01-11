@@ -1,13 +1,46 @@
-import React, { useState } from 'react';
-import { analyzeCycleDeviations, DeviationAnalysis } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { listDatasets, listCycles, analyzeCycleDeviations, Dataset, Cycle, DeviationAnalysis } from '../services/api';
 import './Analysis.css';
 
 const Analysis: React.FC = () => {
+  const [datasets, setDatasets] = useState<Dataset[]>([]);
+  const [cycles, setCycles] = useState<Cycle[]>([]);
   const [selectedDataset, setSelectedDataset] = useState<number | null>(null);
   const [selectedCycle, setSelectedCycle] = useState<number | null>(null);
   const [analysis, setAnalysis] = useState<DeviationAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    loadDatasets();
+  }, []);
+
+  useEffect(() => {
+    if (selectedDataset) {
+      loadCycles(selectedDataset);
+    } else {
+      setCycles([]);
+      setSelectedCycle(null);
+    }
+  }, [selectedDataset]);
+
+  const loadDatasets = async () => {
+    try {
+      const data = await listDatasets();
+      setDatasets(data);
+    } catch (err) {
+      console.error('Failed to load datasets:', err);
+    }
+  };
+
+  const loadCycles = async (datasetId: number) => {
+    try {
+      const data = await listCycles(datasetId);
+      setCycles(data);
+    } catch (err) {
+      console.error('Failed to load cycles:', err);
+    }
+  };
 
   const handleAnalyze = async () => {
     if (!selectedCycle) {
@@ -48,17 +81,29 @@ const Analysis: React.FC = () => {
               onChange={(e) => setSelectedDataset(parseInt(e.target.value))}
             >
               <option value="">Select a dataset...</option>
-              {/* Would need to load datasets */}
+              {datasets.map((ds) => (
+                <option key={ds.id} value={ds.id}>
+                  {ds.name} ({ds.total_cycles} cycles)
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-group">
             <label>Cycle</label>
-            <input
-              type="number"
-              placeholder="Enter cycle ID"
+            <select
               value={selectedCycle || ''}
               onChange={(e) => setSelectedCycle(parseInt(e.target.value))}
-            />
+              disabled={!selectedDataset}
+            >
+              <option value="">Select a cycle...</option>
+              {cycles.map((cycle) => (
+                <option key={cycle.id} value={cycle.id}>
+                  Cycle {cycle.cycle_number}
+                  {cycle.is_reference && ' (Reference)'}
+                  {cycle.is_anomalous && ' ⚠️'}
+                </option>
+              ))}
+            </select>
           </div>
           <button className="primary" onClick={handleAnalyze} disabled={loading}>
             {loading ? 'Analyzing...' : 'Analyze'}
