@@ -1,0 +1,54 @@
+.cycle-chart {
+  width: 100%;
+}
+
+.sensor-selector {
+  margin-bottom: 20px;
+}
+
+.sensor-selector label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.sensor-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sensor-chip {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 2px solid #d1d5db;
+  background-color: white;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.sensor-chip:hover {
+  border-color: #3b82f6;
+  background-color: #f0f9ff;
+}
+
+.sensor-chip.active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.no-sensors-selected {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+.no-sensors-selected p {
+  font-size: 16px;
+}
