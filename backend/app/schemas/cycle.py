@@ -45,7 +45,7 @@ class CycleDetailResponse(BaseModel):
     is_reference: bool
     is_anomalous: bool
     anomaly_score: Optional[float]
-    metadata: Optional[Dict[str, Any]]
+    cycle_metadata: Optional[Dict[str, Any]]
     sensor_data: Optional[List[SensorData]] = None
     
     class Config:

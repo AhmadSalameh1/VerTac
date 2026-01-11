@@ -63,7 +63,7 @@ class CycleService:
             is_reference=cycle.is_reference,
             is_anomalous=cycle.is_anomalous,
             anomaly_score=cycle.anomaly_score,
-            metadata=cycle.metadata,
+            cycle_metadata=cycle.cycle_metadata,
             sensor_data=sensor_data
         )
     

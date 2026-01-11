@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { listDatasets, analyzeCycleDeviations, Dataset, DeviationAnalysis } from '../services/api';
+import { analyzeCycleDeviations, DeviationAnalysis } from '../services/api';
 import './Analysis.css';
 
 const Analysis: React.FC = () => {

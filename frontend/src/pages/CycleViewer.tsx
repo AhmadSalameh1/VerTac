@@ -11,12 +11,6 @@ const CycleViewer: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (datasetId) {
-      loadCycles(parseInt(datasetId));
-    }
-  }, [datasetId]);
-
   const loadCycles = async (dsId: number) => {
     try {
       setLoading(true);
@@ -32,6 +26,13 @@ const CycleViewer: React.FC = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (datasetId) {
+      loadCycles(parseInt(datasetId));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [datasetId]);
 
   const loadCycleDetail = async (cycleId: number) => {
     try {
@@ -122,25 +123,25 @@ const CycleViewer: React.FC = () => {
                   <div className="cycle-stats">
                     <div className="stat">
                       <label>Duration</label>
-                      <value>{selectedCycle.duration.toFixed(2)}s</value>
+                      <span className="value">{selectedCycle.duration.toFixed(2)}s</span>
                     </div>
                     <div className="stat">
                       <label>Start Time</label>
-                      <value>{selectedCycle.start_time.toFixed(2)}</value>
+                      <span className="value">{selectedCycle.start_time.toFixed(2)}</span>
                     </div>
                     <div className="stat">
                       <label>End Time</label>
-                      <value>{selectedCycle.end_time.toFixed(2)}</value>
+                      <span className="value">{selectedCycle.end_time.toFixed(2)}</span>
                     </div>
                     <div className="stat">
                       <label>Status</label>
-                      <value>
+                      <span className="value">
                         {selectedCycle.is_complete ? (
                           <span className="badge success">Complete</span>
                         ) : (
                           <span className="badge danger">Incomplete</span>
                         )}
-                      </value>
+                      </span>
                     </div>
                   </div>
                 </div>

@@ -51,8 +51,8 @@ class Cycle(Base):
     # Data storage
     data_path = Column(String, nullable=True)  # Path to stored cycle data
     
-    # Metadata
-    metadata = Column(JSON, nullable=True)
+    # Metadata (avoid 'metadata' name - reserved by SQLAlchemy)
+    cycle_metadata = Column(JSON, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
     # Relationships
