@@ -9,6 +9,7 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.api.v1.router import api_router
+from live.routes import router as live_router
 
 
 @asynccontextmanager
@@ -37,8 +38,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include API router
+# Include API routers
 app.include_router(api_router, prefix="/api/v1")
+app.include_router(live_router, prefix="/api/live", tags=["live"])
 
 
 @app.get("/")

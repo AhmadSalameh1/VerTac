@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import DatasetList from './pages/DatasetList';
 import CycleViewer from './pages/CycleViewer';
 import Analysis from './pages/Analysis';
+import LiveMonitoring from './components/Live/LiveMonitoring';
+import PostCycleAnalysis from './components/Live/PostCycleAnalysis';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
                 <Link to="/">Dashboard</Link>
                 <Link to="/datasets">Datasets</Link>
                 <Link to="/analysis">Analysis</Link>
+                <Link to="/live">Live Monitoring</Link>
               </div>
             </nav>
           </div>
@@ -30,6 +33,8 @@ function App() {
               <Route path="/datasets" element={<DatasetList />} />
               <Route path="/cycles/:datasetId" element={<CycleViewer />} />
               <Route path="/analysis" element={<Analysis />} />
+              <Route path="/live" element={<LiveMonitoring />} />
+              <Route path="/live/analysis/:cycleId" element={<PostCycleAnalysis />} />
             </Routes>
           </div>
         </main>
