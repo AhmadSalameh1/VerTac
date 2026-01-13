@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     
     # Application
     PROJECT_NAME: str = "VerTac"
-    VERSION: str = "0.1.0"
+    VERSION: str = "0.2.1"
     DEBUG: bool = True
     
     # Database
